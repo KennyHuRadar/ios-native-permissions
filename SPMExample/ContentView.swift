@@ -2,63 +2,125 @@ import SwiftUI
 import CoreLocation
 import RadarSDK
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private let locationManager = CLLocationManager()
-    @Published var locationAuthorized: Bool = false
-
-    override init() {
-        super.init()
-        self.locationManager.delegate = self
-    }
-
-    func requestLocationAuthorization() {
-        locationManager.requestWhenInUseAuthorization()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            self.locationAuthorized = true
-        default:
-            self.locationAuthorized = false
-        }
-    }
-}
-
 struct ContentView: View {
-    @StateObject private var locationManager = LocationManager()
-
+    @ObservedObject var permissionsManager = PermissionsManager.shared
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-        .onAppear(perform: {
-            //let location = CLLocation(latitude: 49.68956683045484, longitude: -107.27634218307078)
-            locationManager.requestLocationAuthorization()
-            let location = CLLocation(latitude: 49.68956683045484, longitude: -107.27634218307078)
-           Radar.getContext(location: location) { status, location, context in
-                // Handle the result
-                if status == .success {
-                    print("Context: \(String(describing: context))")
-                } else {
-                    print("Failed to get context")
+        NavigationView {
+            Group {
+                switch permissionsManager.viewState {
+                case .NoPermissionsGranted:
+                    GetForegroundPermissionStateView()
+                case .ForegroundPermissionsPending:
+                    WaitingForForegroundPermissionView()
+                case .ForegroundPermissionsRejected:
+                    GoToSettingsViewForegroundDenied()
+                case .ForegroundPermissionsGranted:
+                    GetBackgroundPermissionStateView()
+                case .BackgroundPermissionsPending:
+                    WaitingForBackgroundPermissionView()
+                case .BackgroundPermissionsRejected:
+                    GoToSettingsViewBackgroundDenied()
+                case .BackgroundPermissionsGranted:
+                    SuccessView()
+                default:
+                    GoToSettingsView()
                 }
             }
-        })
-        .onChange(of: locationManager.locationAuthorized) { newValue in
-            if newValue {
-                // Location permission was granted, do something here
-                print("Location permission was granted")
-                print(Radar.sdkVersion)
-                Radar.trackOnce()
-            }
         }
     }
+
 }
+
+struct GetForegroundPermissionStateView: View {
+    
+    var body: some View {
+        VStack {
+            Text("Get foreground location permissions, explain why you need them here.")
+            Button("Request Foreground Permission") {
+                Radar.requestLocationPermissions(false)
+            }
+        }.navigationBarTitle("Get foreground", displayMode: .inline)
+    }
+}
+
+struct GetBackgroundPermissionStateView: View {
+    
+    var body: some View {
+        VStack {
+            Text("Get background location permissions, explain why you need them here")
+            Button("Request Background Permission") {
+                Radar.requestLocationPermissions(true)
+            }
+        }.navigationBarTitle("Get background", displayMode: .inline)
+    }
+}
+
+struct GoToSettingsView: View {
+    var body: some View {
+        VStack {
+            Text("Go to settings, you cannot proceed without the permissions")
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }.navigationBarTitle("Go to settings", displayMode: .inline)
+    }
+}
+
+struct GoToSettingsViewForegroundDenied: View {
+    var body: some View {
+        VStack {
+            Text("Go to settings, you cannot proceed without the  foreground permissions")
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }.navigationBarTitle("Go to settings", displayMode: .inline)
+    }
+}
+
+struct GoToSettingsViewBackgroundDenied: View {
+    var body: some View {
+        VStack {
+            Text("Go to settings, you cannot proceed without the background permissions")
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        }.navigationBarTitle("Go to settings", displayMode: .inline)
+    }
+}
+
+struct SuccessView: View {
+    var body: some View {
+        Text("We got the location permissions!")
+            .navigationTitle("Success")
+    }
+}
+
+struct FailureView: View {
+    var body: some View {
+        Text("Failure View")
+            .navigationTitle("Failure")
+    }
+}
+struct WaitingForBackgroundPermissionView: View {
+    var body: some View {
+        Text("Waiting for background permission")
+        .navigationBarTitle("Waiting", displayMode: .inline)
+    }
+}
+
+struct WaitingForForegroundPermissionView: View {
+    var body: some View {
+        Text("Waiting for foreground permission")
+        .navigationBarTitle("Waiting", displayMode: .inline)
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

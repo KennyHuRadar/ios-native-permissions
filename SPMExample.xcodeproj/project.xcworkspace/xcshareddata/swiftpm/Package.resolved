@@ -1,13 +1,13 @@
 {
-  "originHash" : "beb7af804b9c3bdb75b63b220ee3676f01a75b52db0b8c2ed7a2742565b1e0b6",
+  "originHash" : "10ad4694bcb409fb9c3ec72c2ab18a512e6d59d9758036bd10ac674e9fc529d2",
   "pins" : [
     {
-      "identity" : "radar-sdk-ios-spm",
+      "identity" : "radar-sdk-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/radarlabs/radar-sdk-ios-spm.git",
+      "location" : "https://github.com/radarlabs/radar-sdk-ios.git",
       "state" : {
-        "revision" : "1621c9014266e04c1027d187eae13fb20d0bfa0b",
-        "version" : "3.10.1"
+        "branch" : "kennyhu/fence-1912-better-abstraction-for-permissions-handling",
+        "revision" : "46104276d6357bcfcb6fb5d9ffc02a930c08f3f3"
       }
     }
   ],

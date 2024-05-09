@@ -14,7 +14,8 @@
 		E62446352BDBFE0800ECCCAD /* SPMExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62446342BDBFE0800ECCCAD /* SPMExampleTests.swift */; };
 		E624463F2BDBFE0800ECCCAD /* SPMExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E624463E2BDBFE0800ECCCAD /* SPMExampleUITests.swift */; };
 		E62446412BDBFE0800ECCCAD /* SPMExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62446402BDBFE0800ECCCAD /* SPMExampleUITestsLaunchTests.swift */; };
-		E62446582BE2BED300ECCCAD /* RadarSDK in Frameworks */ = {isa = PBXBuildFile; productRef = E62446572BE2BED300ECCCAD /* RadarSDK */; };
+		E624465A2BEAC2AA00ECCCAD /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62446592BEAC2AA00ECCCAD /* PermissionsManager.swift */; };
+		E62446AA2BED21F700ECCCAD /* RadarSDK in Frameworks */ = {isa = PBXBuildFile; productRef = E62446A92BED21F700ECCCAD /* RadarSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		E624463A2BDBFE0800ECCCAD /* SPMExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPMExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E624463E2BDBFE0800ECCCAD /* SPMExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMExampleUITests.swift; sourceTree = "<group>"; };
 		E62446402BDBFE0800ECCCAD /* SPMExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E62446592BEAC2AA00ECCCAD /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		E624465B2BEAC71900ECCCAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E62446582BE2BED300ECCCAD /* RadarSDK in Frameworks */,
+				E62446AA2BED21F700ECCCAD /* RadarSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,11 +100,13 @@
 		E62446212BDBFE0600ECCCAD /* SPMExample */ = {
 			isa = PBXGroup;
 			children = (
+				E624465B2BEAC71900ECCCAD /* Info.plist */,
 				E62446222BDBFE0600ECCCAD /* SPMExampleApp.swift */,
 				E62446242BDBFE0600ECCCAD /* ContentView.swift */,
 				E62446262BDBFE0800ECCCAD /* Assets.xcassets */,
 				E62446282BDBFE0800ECCCAD /* SPMExample.entitlements */,
 				E62446292BDBFE0800ECCCAD /* Preview Content */,
+				E62446592BEAC2AA00ECCCAD /* PermissionsManager.swift */,
 			);
 			path = SPMExample;
 			sourceTree = "<group>";
@@ -148,7 +153,7 @@
 			);
 			name = SPMExample;
 			packageProductDependencies = (
-				E62446572BE2BED300ECCCAD /* RadarSDK */,
+				E62446A92BED21F700ECCCAD /* RadarSDK */,
 			);
 			productName = SPMExample;
 			productReference = E624461F2BDBFE0600ECCCAD /* SPMExample.app */;
@@ -223,7 +228,7 @@
 			);
 			mainGroup = E62446162BDBFE0600ECCCAD;
 			packageReferences = (
-				E62446562BE2BED300ECCCAD /* XCRemoteSwiftPackageReference "radar-sdk-ios-spm" */,
+				E62446A82BED21F700ECCCAD /* XCRemoteSwiftPackageReference "radar-sdk-ios" */,
 			);
 			productRefGroup = E62446202BDBFE0600ECCCAD /* Products */;
 			projectDirPath = "";
@@ -268,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E62446252BDBFE0600ECCCAD /* ContentView.swift in Sources */,
+				E624465A2BEAC2AA00ECCCAD /* PermissionsManager.swift in Sources */,
 				E62446232BDBFE0600ECCCAD /* SPMExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +438,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SPMExample/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location pls";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -443,7 +450,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -471,6 +478,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SPMExample/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location pls";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -482,7 +490,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -629,20 +637,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E62446562BE2BED300ECCCAD /* XCRemoteSwiftPackageReference "radar-sdk-ios-spm" */ = {
+		E62446A82BED21F700ECCCAD /* XCRemoteSwiftPackageReference "radar-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/radarlabs/radar-sdk-ios-spm.git";
+			repositoryURL = "https://github.com/radarlabs/radar-sdk-ios.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.10.1;
+				branch = "kennyhu/fence-1912-better-abstraction-for-permissions-handling";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E62446572BE2BED300ECCCAD /* RadarSDK */ = {
+		E62446A92BED21F700ECCCAD /* RadarSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E62446562BE2BED300ECCCAD /* XCRemoteSwiftPackageReference "radar-sdk-ios-spm" */;
+			package = E62446A82BED21F700ECCCAD /* XCRemoteSwiftPackageReference "radar-sdk-ios" */;
 			productName = RadarSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
