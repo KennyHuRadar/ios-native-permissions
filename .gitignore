@@ -1,0 +1,46 @@
+# Xcode
+##
+# Xcode automatically generates these directories
+xcuserdata/
+DerivedData/
+# Code coverage
+*.xcresult
+# Xcode 13+ pull request comments
+*.xcannotation
+
+# Swift Package Manager
+##
+.build/
+Packages/
+Package.resolved
+*.xcodeproj
+
+# CocoaPods
+##
+# Ignore all the artifacts that CocoaPods generates
+Pods/
+Podfile.lock
+
+# Carthage
+##
+# Ignore all the artifacts that Carthage generates
+Carthage/
+
+# Fastlane
+##
+# Ignore all the artifacts that Fastlane generates
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Other files and directories to ignore
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
