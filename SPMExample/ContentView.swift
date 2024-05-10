@@ -31,24 +31,24 @@ struct ContentView: View {
 }
 
 struct GetForegroundPermissionStateView: View {
-    
+    @ObservedObject var permissionsManager = PermissionsManager.shared
     var body: some View {
         VStack {
             Text("Get foreground location permissions, explain why you need them here.")
             Button("Request Foreground Permission") {
-                Radar.requestLocationPermissions(false)
+                permissionsManager.requestLocationPermissions(background: false)
             }
         }.navigationBarTitle("Get foreground", displayMode: .inline)
     }
 }
 
 struct GetBackgroundPermissionStateView: View {
-    
+    @ObservedObject var permissionsManager = PermissionsManager.shared
     var body: some View {
         VStack {
             Text("Get background location permissions, explain why you need them here")
             Button("Request Background Permission") {
-                Radar.requestLocationPermissions(true)
+                permissionsManager.requestLocationPermissions(background: true)
             }
         }.navigationBarTitle("Get background", displayMode: .inline)
     }
